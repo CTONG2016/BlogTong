@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Page About</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    </head>
+
+    <body>
+        <nav class="ui inverted attached segment mystyle-padded-nav-mini mystyle-shadow-nav">
+            <div class="ui container">
+                <div class="ui inverted secondary stackable menu">
+                    <h2 class="ui teal header item"> Blog Tong</h2>
+                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> 首页</a>
+                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> 分类</a>
+                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> 标签</a>
+                    <a href="#" th:href="@{/archives}" class="item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> 时间线</a>
+                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> 关于我</a>
+                    <div class="right item mystyle-mobile-hide-style mobile-item">
+                        <form name="search" action="#" th:action="@{/search}" target="_blank" method="post"> <!-- 打开一个新的页面 -->
+                            <!-- <div class="ui icon inverted transparent input"> -->
+                            <div class="ui icon input">
+                                <input name="query" type="text" placeholder="search..." class="mystyle-input-size" th:value="${query}">
+                                <i onclick="document.forms['search'].submit()" class="search link icon"></i> <!-- JS函数提交页面的表单 -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ui menu toggle black icon button mystyle-button-bar-right mystyle-mobile-show-style">
+                <i class="sidebar icon"></i>
+            </a>
+        </nav>
+
+        <div class="mystyle-container-small mystyle-padded-div-medium">
+            <div class="ui container">
+                <div class="ui stackable grid">
+                    <!-- image of me -->
+                    <div class="eight wide column">         
+                        <img src="../static/images/me.png" th:src="@{/images/me.png}" alt="" class="ui rounded image" style="width: 450px">
+                    </div>
+                    <div class="eight wide column">
+                        <div class="ui top attached segment">
+                            <div class="ui header">关于我</div>
+                        </div>
+                        <div class="ui attached segment">
+                            <p class="mystyle-text">CHEN TONG，一个酷爱编程的非典型理工男，热爱旅游，执着与追求与冒险。一个终身追求自由的人，向往诗和远方</p>
+                            <p class="mystyle-text">热爱编程，喜欢思考，正在探索搞高效的学习方法.......</p>
+                        </div>
+                        <div class="ui attached segment">
+                            <div class="ui orange basic label left pointing">编程</div>
+                            <div class="ui orange basic label left pointing">旅行</div>
+                            <div class="ui orange basic label left pointing">思考人生</div>
+                            <div class="ui orange basic label left pointing">运动</div>
+                            <div class="ui orange basic label left pointing">音乐电影</div>
+                        </div>
+                        <div class="ui attached segment">
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Java</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Swift</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Node.js</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Angular</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C#</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C++</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">React Native</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C</div>
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Android</div>
+                        </div>
+                        <div class="ui bottom attached segment">
+                            <a href="#" class="ui githubLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="github icon"></i></a>
+                            <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+                            <a href="#" class="ui qqLien circular icon button" data-content="QQ : 2424082745" data-position="bottom center"><i class="qq icon"></i></a>
+                            <a href="#" class="ui mailLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="mail icon"></i></a>
+                        </div>
+                        <!-- 弹出的微信的二维码信息 -->
+                        <div class="ui wechatQR flowing popup transition hidden">                        
+                            <div class="ui orange basic label">
+                                <div class="ui images" style="font-size: inherit"> <!-- inherit 继承上级的演样式 -->
+                                    <div class="image center aligned">
+                                        <img src="../static/images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" alt="" class="ui image rounded bordered" style="width: 100px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Part of the page -->
+        <footer class="ui inverted vertical segment mystyle-padded-footer-max">
+            <div class="ui center aligned container">
+                <!-- 16 parts of the width : 3 3 3 4 divided with line -->
+                <div class="ui inverted divided stackable grid"> 
+                    <div class="three wide column">
+                        <div class="ui inverted link list">  <!-- link | -->
+                            <a href="#" class="item">
+                                <img src="../static//images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" class="ui rounded image" alt="" style="width: 100px">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">版权声明</h4>
+                        <div class="ui inverted link list mystyle-opacity-tiny">
+                            版权归原作所有 <br> 未经允许，严禁转载 <br>
+                        </div>
+
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">联系我</h4>                      
+                        <div class="ui inverted link list">
+                            <a href="#" class="item">+33 667233690</a>
+                            <a href="#" class="item">chen2016tong@gmail.com</a>
+                            <a href="#" class="item">Wechat : 1872302197</a>
+                        </div>
+                    </div>
+                    <div class="seven wide column">
+                        <h4 class="ui inverted header">最新博客</h4>
+                        <div class="ui inverted link list mystyle-opacity-tiny">
+                            这是我的个人的博客网页，分享关于编程，写作和人生的感悟。<br> 希望能借此帮助更多的人，一起学习
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom line -->
+                <div class="ui inverted section divider"></div>
+                <a class="m-text-spaced mystyle-opacity-tiny"> Copyright@ 2018-2019 Web Designed by CHEN Tong </a>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+        <script>
+            // 点击Menu按钮，触发标签的样式，显示或者隐藏
+            $('.menu.toggle').click(function() {
+               $('.mobile-item').toggleClass('mystyle-mobile-hide-style');
+            });
+            // Show wechat information
+            $('.wechat').popup( {
+                popup : $('.wechatQR'),
+                on: 'hover',
+                position: 'bottom center'
+            });
+            // 非点击的情况下，显示QQ的信息
+            $('.githubLien').popup();
+            $('.qqLien').popup();
+            $('.mailLien').popup();
+        </script>
+
+    </body>
+</html>
