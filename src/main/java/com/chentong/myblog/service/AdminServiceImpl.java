@@ -4,10 +4,10 @@ import com.chentong.myblog.dao.AdminRepository;
 import com.chentong.myblog.handler.NotFoundException;
 import com.chentong.myblog.model.Blog;
 import com.chentong.myblog.model.BlogQuery;
+import com.chentong.myblog.model.Tag;
 import com.chentong.myblog.model.Type;
 import com.chentong.myblog.util.MarkdownUtils;
 import com.chentong.myblog.util.MyBeanUtils;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -92,7 +92,7 @@ public class AdminServiceImpl implements AdminService {
                 if(!"".equals(blog.getTitle()) && blog.getTitle() != null) {
                     list.add(criteriaBuilder.like(root.<String>get("title"), "%"+blog.getTitle()));
                 }
-                if(blog.getTypeId() != null) {  //根据blog对象的type的id值进行查询
+                if(blog.getTypeId() != null ) {  //根据blog对象的type的id值进行查询
                     list.add(criteriaBuilder.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
                 }
                 if(blog.isRecommend()) {
@@ -150,6 +150,7 @@ public class AdminServiceImpl implements AdminService {
             blog.setCreateTime(new Date());
             blog.setUpdateTime(new Date());
             blog.setViews(0); // 设置初始的浏览的次数
+            blog.setGood(0); // 初始化点赞的次数
         } else {
             blog.setUpdateTime(new Date());
         }

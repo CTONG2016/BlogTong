@@ -1,7 +1,5 @@
 package com.chentong.myblog.util;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,10 +12,13 @@ public class Md5Util {
     public static String code(String str){
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
+            // 获取到字符串的字节流
             md.update(str.getBytes());
             byte[] byteDigest = md.digest();
             int i;
+            // 字符串的缓冲区域
             StringBuffer buffer = new StringBuffer("");
+            // 针对每一个的字节 改变字节对应的字符形式
             for(int offset=0; offset < byteDigest.length; offset++){
                 i = byteDigest[offset];
                 if(i<0)

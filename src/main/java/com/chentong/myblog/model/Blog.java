@@ -21,6 +21,7 @@ public class Blog {
     private String firstpicture;
     private String flag;
     private Integer views; // 浏览的次数
+    private Integer good; // 点赞的次数
 
     /**
      * 数据库的读写规则，对于布尔类型的变量，要做前端的判断，则必须使用小写的变量符号 !!!!!!
@@ -117,6 +118,10 @@ public class Blog {
         this.views = views;
     }
 
+    public Integer getGood() { return good; }
+
+    public void setGood(Integer good) { this.good = good; }
+
     public boolean isAppreciation() {
         return appreciation;
     }
@@ -206,7 +211,7 @@ public class Blog {
         this.tagIds = tagsToIds(this.getListTags());
     }
 
-    //设置生成 1, 2, 3
+    // 设置生成 1, 2, 3
     private String tagsToIds(List<Tag> tags){
         if(!tags.isEmpty()) {
             StringBuffer ids = new StringBuffer();
@@ -240,26 +245,26 @@ public class Blog {
     @Override
     public String toString() {
         return "Blog{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", content='" + content + '\'' +
-                ", firstpicture='" + firstpicture + '\'' +
-                ", flag='" + flag + '\'' +
-                ", views=" + views +
-                ", appreciation=" + appreciation +
-                ", shared=" + shared +
-                ", comment=" + comment +
-                ", published=" + published +
-                ", recommend=" + recommend +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", user=" + user +
-                ", type=" + type +
-                ", listTags=" + listTags +
-                ", tagIds='" + tagIds + '\'' +
-                ", listComments=" + listComments +
-                '}';
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", content='" + content + '\'' +
+            ", firstpicture='" + firstpicture + '\'' +
+            ", flag='" + flag + '\'' +
+            ", views=" + views +
+            ", appreciation=" + appreciation +
+            ", shared=" + shared +
+            ", comment=" + comment +
+            ", published=" + published +
+            ", recommend=" + recommend +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", user=" + user +
+            ", type=" + type +
+            ", listTags=" + listTags +
+            ", tagIds='" + tagIds + '\'' +
+            ", listComments=" + listComments +
+            '}';
     }
 
 }

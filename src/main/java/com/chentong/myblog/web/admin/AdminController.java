@@ -36,7 +36,7 @@ public class AdminController {
      * 此处可以限制一页显示的博客的数目size
      */
     @GetMapping("/admin")
-    public String admin(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
+    public String admin(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
         model.addAttribute("page", adminService.listBlog(pageable, blog));
         model.addAttribute("types", typeService.listType()); // 从TypeService中获取到所有的类型，用于blog界面的加载 ==> list Type
         return "admin/admin";

@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>博客归档</title>
+        <title>Blog Tong</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+        <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
     </head>
     <body>
         <!-- Naviogatoion Bar ： stackable 注意响应手机移动端, 可堆叠的grid, 支持手机端的反转显示  -->
@@ -13,13 +14,13 @@
             <div class="ui container">
                 <div class="ui inverted secondary stackable menu">
                     <h2 class="ui teal header item"> Blog Tong</h2>
-                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> 首页</a>
-                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> 分类</a>
-                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> 标签</a>
-                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> 时间线</a>
-                    <a href="#" th:href="@{/about}" class="item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> 关于我</a>
+                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> <span>首页</span></a>
+                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> <span>分类</span></a>
+                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> <span>标签</span></a>
+                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> <span>时间线</span></a>
+                    <a href="#" th:href="@{/about}" class="item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> <span>关于我</span></a>
                     <div class="right item mystyle-mobile-hide-style mobile-item">
-                        <form name="search" action="#" th:action="@{/search}" target="_blank" method="post"> <!-- 打开一个新的页面 -->
+                        <form name="search" action="#" th:action="@{/search}" method="post">
                             <!-- <div class="ui icon inverted transparent input"> -->
                             <div class="ui icon input">
                                 <input name="query" type="text" placeholder="search..." class="mystyle-input-size" th:value="${query}">
@@ -34,75 +35,24 @@
                 <i class="sidebar icon"></i>
             </a>
         </nav>
-        <!-- Medium Part Content -->
         <div class="mystyle-container-small mystyle-padded-div-medium">
             <div class="ui container">
-                <!-- Header of content : two column -->
-                <div class="ui top bottom attached padded segment">
-                    <div class="ui middle aligned two column grid"> <!-- middle aligned : center the div -->
-                        <div class="column">
-                            <h3 class="ui teal header">归档</h3>
-                        </div>
-                        <div class="right aligned column">
-                           共 <h3 class="ui orange header mystyle-inline-block" th:text="${count}"> 59 </h3> 篇博客 <!-- Set the inlinde blog, remove return-->
-                        </div>
-                    </div>
-                </div>
                 <th:block th:each="item: ${archivesMap}">
-                    <h3 class="ui center aligned header" th:text="${item.key}"> 2018 </h3>
+                    <!-- <h3 class="ui center aligned header" style="font-size: 16px;"> <span th:text="${item.key}">2018</span> 年的博客 </h3> -->
                     <div class="ui vertical menu fluid"> <!-- Menu with items -->
-                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${item.value}">
-                            <span> <!-- 使用span组合连个元素到一起 / 左边元素 -->
-                                <i class="mini teal circle icon"></i> <span th:text="${blog.title}"> 博客名称 </span>
-                                <div class="ui teal basic left pointing label mystyle-padded-nav-mini m-text-thin" th:text="${#dates.format(blog.updateTime, 'MMMdd')}">09-26</div>
-                            </span>
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="item" th:each="blog: ${item.value}">
+                            <p>
+                                <i class="calendar icon"></i>
+                                <i th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}">9月12</i>
+                            </p>
+                            <span> <i class="mini teal circle icon"></i> <span th:text="${blog.title}"> 博客名称 </span> </span>
                             <div class="ui orange basic left pointing label mystyle-padded-nav-mini m-text-thin" th:text="${blog.flag}">Flag</div>
                         </a>
                     </div>
                 </th:block>
             </div>
         </div>
-        <!-- Footer Part of the page -->
-        <footer class="ui inverted vertical segment mystyle-padded-footer-max">
-            <div class="ui center aligned container">
-                <!-- 16 parts of the width : 3 3 3 4 divided with line -->
-                <div class="ui inverted divided stackable grid"> 
-                    <div class="three wide column">
-                        <div class="ui inverted link list">  <!-- link | -->
-                            <a href="#" class="item">
-                                <img src="../static//images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" class="ui rounded image" alt="" style="width: 100px">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">最新博客</h4>                
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">用户故事</a>
-                            <a href="#" class="item">用户故事</a>
-                            <a href="#" class="item">用户故事</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">联系我</h4>                      
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">+33 667233690</a>
-                            <a href="#" class="item">chen2016tong@gmail.com</a>
-                            <a href="#" class="item">Wechat : 1872302197</a>
-                        </div>
-                    </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">最新博客</h4>
-                        <div class="ui inverted link list mystyle-opacity-tiny">
-                            这是我的个人的博客网页，分享关于编程，写作和人生的感悟。希望能借此帮助更多的人，一起学习
-                        </div>
-                    </div>
-                </div>
-                <!-- Bottom line -->
-                <div class="ui inverted section divider"></div>
-                <a class="m-text-spaced mystyle-opacity-tiny"> Copyright@ 2018-2019 Web Designed by CHEN Tong </a>
-            </div>
-        </footer>
-
+        <footer th:include="_fragments :: footer" class="ui inverted vertical segment mystyle-padded-footer-max"></footer>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
         <script>

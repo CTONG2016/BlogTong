@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /** Controller
  * 定义的主目录是在admin下的 后台页面控制的部分
  * Login: chentong
- * Password: chentong
+ * Password: TChong15
  */
 @Controller
 @RequestMapping("/admin")

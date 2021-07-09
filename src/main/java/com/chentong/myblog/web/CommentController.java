@@ -27,8 +27,9 @@ public class CommentController {
     @Value("${comment.avatar}")
     private String avatar;
 
-    // 返回页面的一个片段
-    // 加载界面的时候，需要首先将评论加载出来显示
+    /** 返回页面的一个片段
+     *  加载界面的时候，需要首先将评论加载出来显示
+     */
     @GetMapping("/comments/{blogId}")
     public String commentsList(@PathVariable Long blogId, Model model){
         model.addAttribute("comments", commentService.listCommentByBlogId(blogId));
@@ -59,6 +60,15 @@ public class CommentController {
         }
         commentService.saveComment(comment);
         return "redirect:/comments/"+ blogId;  // 点击之后调用的函数获取评论，刷新页面的片段区域
+    }
+
+    /**
+     * 点赞之后增加该博客的点赞的数目; 采用页面的片段加载，不重新刷新界面的效果
+     */
+    @GetMapping("/good/{blogId}")
+    public String good(@PathVariable Long blogId){
+        commentService.updateGoodBlog(blogId);
+        return "redirect:/comments/"+ blogId;
     }
 
 }

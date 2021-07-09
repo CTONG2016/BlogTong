@@ -1,7 +1,7 @@
 package com.chentong.myblog.util;
 
 /**
- * 字符串的简单的加密类 ： 字符串与字节数组的转换
+ * 字符串的简单的加密类: 字符串与字节数组的转换
  */
 public class EncryptUncrypt {
 

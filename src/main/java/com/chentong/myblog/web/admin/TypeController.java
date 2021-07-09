@@ -33,7 +33,7 @@ public class TypeController {
      *  当访问到改路径的页面时，从数据库中将数据以分页的方式那出来 ( Define default : 分页的大小和排序方式)，送到页面的model中去使用
      */
     @GetMapping("/types")
-    public String types(@PageableDefault(size = 5, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model){
+    public String types(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model){
         model.addAttribute("page", typeService.listType(pageable)); // 返回pageable的数据对象page, 在前端界面进行解析page
         return "admin/types";
     }

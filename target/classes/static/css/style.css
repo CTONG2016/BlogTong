@@ -1,9 +1,35 @@
-/*
-body {
-    background: url("../images/bg1.png") center no-repeat !important;
+html, body {
+    /*
+    background: url("../images/.png") center no-repeat !important;
     background-position: center center;
+    */
+    background: #e0efe4 !important;
 }
-*/
+
+.mystyleHeader {
+    font-family: cursive !important;
+    font-size: 19px !important;
+}
+
+.mystyleSliderImage {
+    position:absolute;
+    height:40px;
+    font-family: Oswald,sans-serif;
+    font-size:32px;
+    font-weight:200;
+    line-height:1.2;
+    text-align:center;
+    background-color:rgba(255,188,5,0.8);
+}
+
+span {
+    /* font-family: cursive !important; */
+    font-size: 16px !important;
+}
+
+.ui.form .fields {
+    margin: 0 !important;
+}
 
 /* define the class important */
 .mystyle-padded-nav-mini {
@@ -12,8 +38,8 @@ body {
 }
 
 .mystyle-padded-div-medium {
-    padding-top: 2.5em !important;
-    padding-bottom: 2.5em !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
 }
 
 .mystyle-padded-div-large {
@@ -137,20 +163,29 @@ body {
     display: block !important;
 }
 
+/* 判断是否是处在手机端显示 */
 @media screen and (max-width: 768px) {
+    .ui.padded.segment {
+        padding: 1em 0 1em 0 !important;
+    }
+
     .mystyle-mobile-hide-style {
         display: none !important;
     }
+
     .mystyle-mobile-show-style {
         display: block !important;
     }
+
     .mystyle-text-content-p {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+
     .mysytle-mobile-input-wide {
         width: 100% !important;
     }
+
     .mystyle-mobile-content-clear {
         padding-left: 0 !important;
         padding-right: 0 !important;

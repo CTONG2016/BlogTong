@@ -1,4 +1,5 @@
 package com.chentong.myblog.web;
+
 import com.chentong.myblog.service.AdminService;
 import com.chentong.myblog.service.TagService;
 import com.chentong.myblog.service.TypeService;
@@ -33,10 +34,10 @@ public class IndexController {
     private TagService tagService;
 
     @GetMapping("/")
-    public String index(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, Model model){
+    public String index(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, Model model){
         model.addAttribute("page", adminService.listBlog(pageable)); // 获取数据到model中
         model.addAttribute("types", typeService.listTypeTop(6)); // 显示的Type的数目
-        model.addAttribute("tags", tagService.listTagTop(10)); // 显示的Tag的数目
+        model.addAttribute("tags", tagService.listTagTop(8)); // 显示的Tag的数目
         model.addAttribute("recommendBlogs", adminService.listRecommendBlog(8));
         return "index";
     }

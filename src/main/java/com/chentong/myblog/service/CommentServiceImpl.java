@@ -38,8 +38,7 @@ public class CommentServiceImpl implements CommentService{
     public Comment saveComment(Comment comment) {
         Long parentCommentId = comment.getParentComment().getId();
         /**
-         * 如果有父类的评论，则设置当前的评论的父类的评论
-         * 反正就是顶级的父级，设置父类的评论为空
+         * 如果有父类的评论，则设置当前的评论的父类的评论，反之就是顶级的父级，设置父类的评论为空
          */
         if(parentCommentId != -1){
             comment.setParentComment(commentRepository.getOne(parentCommentId));
@@ -48,6 +47,15 @@ public class CommentServiceImpl implements CommentService{
         }
         comment.setCreateTime(new Date());
         return commentRepository.save(comment);
+    }
+
+    /**
+     * 更新对应博客的点赞的数目
+     * @param id
+     */
+    @Override
+    public void updateGoodBlog(Long id) {
+        commentRepository.updateGoodBlog(id);
     }
 
     /**
