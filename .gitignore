@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /target/
 =======
 target/
 src/main/resources/static/video/
 >>>>>>> master
+=======
+target/
+src/main/resources/static/video/
+>>>>>>> a9531f9c1b89736c00f461ed8e87e51cc20d79d6
