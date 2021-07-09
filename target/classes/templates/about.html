@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>Page About</title>
+        <title>Blog Tong</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+        <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
     </head>
 
     <body>
@@ -13,13 +14,13 @@
             <div class="ui container">
                 <div class="ui inverted secondary stackable menu">
                     <h2 class="ui teal header item"> Blog Tong</h2>
-                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> 首页</a>
-                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> 分类</a>
-                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> 标签</a>
-                    <a href="#" th:href="@{/archives}" class="item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> 时间线</a>
-                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> 关于我</a>
+                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> <span>首页</span></a>
+                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> <span>分类</span></a>
+                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> <span>标签</span></a>
+                    <a href="#" th:href="@{/archives}" class="item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> <span>时间线</span></a>
+                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> <span>关于我</span></a>
                     <div class="right item mystyle-mobile-hide-style mobile-item">
-                        <form name="search" action="#" th:action="@{/search}" target="_blank" method="post"> <!-- 打开一个新的页面 -->
+                        <form name="search" action="#" th:action="@{/search}" method="post">
                             <!-- <div class="ui icon inverted transparent input"> -->
                             <div class="ui icon input">
                                 <input name="query" type="text" placeholder="search..." class="mystyle-input-size" th:value="${query}">
@@ -33,45 +34,30 @@
                 <i class="sidebar icon"></i>
             </a>
         </nav>
-
         <div class="mystyle-container-small mystyle-padded-div-medium">
             <div class="ui container">
-                <div class="ui stackable grid">
-                    <!-- image of me -->
-                    <div class="eight wide column">         
-                        <img src="../static/images/me.png" th:src="@{/images/me.png}" alt="" class="ui rounded image" style="width: 450px">
+                <div class="ui stackable grid"> 
+                    <div class="eight wide column">
+                        <img src="../static/images/me.png" th:src="@{/images/me.png}" alt="" class="ui rounded image" style="width: 460px; box-shadow: 1px 1px 5px 5px #b3c8ba;">
                     </div>
                     <div class="eight wide column">
                         <div class="ui top attached segment">
-                            <div class="ui header">关于我</div>
+                            <div class="ui header" style="text-align: center;">开发者简介</div>
                         </div>
                         <div class="ui attached segment">
-                            <p class="mystyle-text">CHEN TONG，一个酷爱编程的非典型理工男，热爱旅游，执着与追求与冒险。一个终身追求自由的人，向往诗和远方</p>
-                            <p class="mystyle-text">热爱编程，喜欢思考，正在探索搞高效的学习方法.......</p>
+                            <p class="mystyle-text"> CTONG, 极客,  软件开发工程师,  酷爱编程的非典型理工男， 熟悉各种编程语言和开发环境，不断探索新的技术和开发思想 </p>
+                            <b class="mystyle-text"> <strong> 平凡之路， 每个人都值得成为更优秀的自己 </strong> </b>
                         </div>
-                        <div class="ui attached segment">
-                            <div class="ui orange basic label left pointing">编程</div>
-                            <div class="ui orange basic label left pointing">旅行</div>
-                            <div class="ui orange basic label left pointing">思考人生</div>
-                            <div class="ui orange basic label left pointing">运动</div>
-                            <div class="ui orange basic label left pointing">音乐电影</div>
+                        <div class="ui attached segment" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="ui orange basic label left pointing" style="margin-top: 3px;" th:each="tag : ${about.tags}" th:text="${tag}">TAG</div>
                         </div>
-                        <div class="ui attached segment">
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Java</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Swift</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Node.js</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Angular</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C#</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C++</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">React Native</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">C</div>
-                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini">Android</div>
+                        <div class="ui attached segment" style="margin-bottom: 10px;">
+                            <div class="ui teal basic label left pointing mystyle-margin-bottom-mini" th:each="code : ${about.codes}" th:text="${code}">Java</div>
                         </div>
                         <div class="ui bottom attached segment">
-                            <a href="#" class="ui githubLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="github icon"></i></a>
-                            <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
-                            <a href="#" class="ui qqLien circular icon button" data-content="QQ : 2424082745" data-position="bottom center"><i class="qq icon"></i></a>
-                            <a href="#" class="ui mailLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="mail icon"></i></a>
+                            <div class="ui githubLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="github icon"></i></div>
+                            <div class="ui qqLien circular icon button" data-content="QQ : 2424082745" data-position="bottom center"><i class="qq icon"></i></div>
+                            <div class="ui mailLien circular icon button" data-content="chen2016tong@gmail.com" data-position="bottom center"><i class="mail icon"></i></div>
                         </div>
                         <!-- 弹出的微信的二维码信息 -->
                         <div class="ui wechatQR flowing popup transition hidden">                        
@@ -83,52 +69,52 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Footer Part of the page -->
-        <footer class="ui inverted vertical segment mystyle-padded-footer-max">
-            <div class="ui center aligned container">
-                <!-- 16 parts of the width : 3 3 3 4 divided with line -->
-                <div class="ui inverted divided stackable grid"> 
-                    <div class="three wide column">
-                        <div class="ui inverted link list">  <!-- link | -->
-                            <a href="#" class="item">
-                                <img src="../static//images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" class="ui rounded image" alt="" style="width: 100px">
-                            </a>
-                        </div>
+        <h4 class="ui horizontal divider header mystyle-margin-div-small">我的视频分享</h4>
+        <div class="mystyle-container-small" style="padding-bottom: 2.5em !important;">
+            <div class="ui container">
+                <div class="ui stackable grid">
+                    <!-- image of me -->
+                    <div class="five wide column"> 
+                        <video width="320px" controls>
+                            <source src="../static/video/utc.mp4" th:src="@{/video/utc.mp4}" type="video/mp4">
+                        </video>
+                        <h4 style="margin-top: 3px !important;"> 我挚爱的母校 </h4>         
                     </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">版权声明</h4>
-                        <div class="ui inverted link list mystyle-opacity-tiny">
-                            版权归原作所有 <br> 未经允许，严禁转载 <br>
-                        </div>
-
+                    <div class="five wide column">
+                       <!--
+                        <video width="320px" controls>
+                            <source src="../static/video/fly.mp4" th:src="@{/video/fly.mp4}" type="video/mp4">
+                        </video>
+                        <h4 style="margin-top: 3px !important;"> 游学欧洲之学业篇 (创作中...) </h4>
+                        -->
                     </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">联系我</h4>                      
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">+33 667233690</a>
-                            <a href="#" class="item">chen2016tong@gmail.com</a>
-                            <a href="#" class="item">Wechat : 1872302197</a>
-                        </div>
-                    </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">最新博客</h4>
-                        <div class="ui inverted link list mystyle-opacity-tiny">
-                            这是我的个人的博客网页，分享关于编程，写作和人生的感悟。<br> 希望能借此帮助更多的人，一起学习
-                        </div>
+                    <div class="five wide column">
+                    	<!--
+                        <video width="320px" controls>
+                            <source src="../static/video/trip.mp4" th:src="@{/video/trip.mp4}" type="video/mp4">
+                        </video>
+                        <h4 style="margin-top: 3px !important;"> 游学欧洲之旅游篇 (创作中...) </h4>
+                     	-->
                     </div>
                 </div>
-
-                <!-- Bottom line -->
-                <div class="ui inverted section divider"></div>
-                <a class="m-text-spaced mystyle-opacity-tiny"> Copyright@ 2018-2019 Web Designed by CHEN Tong </a>
+                <div class="ui stackable grid">
+                    <!-- image of me -->
+                    <!--
+                    <div class="five wide column">
+                        <video width="320px" controls>
+                            <source src="../static/video/bgmusic.mp4" th:src="@{/video/bgmusic.mp4}" type="video/mp4">
+                        </video>
+                        <h4 style="margin-top: 3px !important;"> 炫酷背景音乐的制作 </h4>
+                    </div>
+                    -->
+                </div>
             </div>
-        </footer>
+        </div>
+        <footer th:include="_fragments :: footer" class="ui inverted vertical segment mystyle-padded-footer-max"></footer>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>

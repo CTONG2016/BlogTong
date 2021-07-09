@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.List;
 
 @Controller
@@ -27,16 +29,28 @@ public class TypeWebController {
     @GetMapping("/types/{id}")
     public String types(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, @PathVariable long id, Model model){
         List<Type> types = typeService.listTypeTop(20); // 查询top的类型，全表的类型
+        String typeName; // 初始化选择的type的类型只到input选框中
         if(id == -1){ // 从导航点入的默认的id值, 取最大的那个值
             id = types.get(0).getId();
+            typeName = types.get(0).getName();
+        } else {
+            typeName = typeService.getType(id).getName();
         }
         model.addAttribute("types", types);
-        // 建立一个查询饿语句，根据type的id类型查询到所有的相关的博客
+        // 建立一个查询语句，根据type的id类型查询到所有的相关的博客
         BlogQuery blogQuery = new BlogQuery();
         blogQuery.setTypeId(id);
         model.addAttribute("page", adminService.listBlog(pageable, blogQuery));
         model.addAttribute("activeId", id);
+        model.addAttribute("name", typeName);
         return "types";
+    }
+
+    // 使用博客的类型进行搜索
+    @PostMapping("/types/search")
+    public String search(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
+        model.addAttribute("page", adminService.listBlog(pageable, blog));
+        return "types :: blogList"; // 返回的页面局部的一个片段fragment，实现页面局部的刷新
     }
 
 }

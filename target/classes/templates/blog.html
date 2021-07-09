@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>博客展示页</title>
+        <title>Blog Tong</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
         <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
         <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
         <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
         <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+        <link rel="stylesheet" href="../static/lib/alert/semantic-ui-alerts.css" th:href="@{/lib/alert/semantic-ui-alerts.css}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     </head>
 
@@ -18,13 +19,13 @@
             <div class="ui container">
                 <div class="ui inverted secondary stackable menu">
                     <h2 class="ui teal header item"> Blog Tong </h2>
-                    <a href="#" class="active item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> 首页</a>
-                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> 分类</a>
-                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> 标签</a>
-                    <a href="#" th:href="@{/archives}" class="item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> 时间线</a>
-                    <a href="#" th:href="@{/about}" class="item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> 关于我</a>
+                    <a href="#" th:href="@{/}" class="item mystyle-mobile-hide-style mobile-item"><i class="home icon"></i> <span> 首页 </span></a>
+                    <a href="#" th:href="@{/types/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="idea icon"></i> <span> 分类</span></a>
+                    <a href="#" th:href="@{/tags/-1}" class="item mystyle-mobile-hide-style mobile-item"><i class="tags icon"></i> <span>标签</span></a>
+                    <a href="#" th:href="@{/archives}" class="item mystyle-mobile-hide-style mobile-item"><i class="tasks icon"></i> <span> 时间线</span></a>
+                    <a href="#" th:href="@{/about}" class="item mystyle-mobile-hide-style mobile-item"><i class="user icon"></i> <span> 关于我</span></a>
                     <div class="right item mystyle-mobile-hide-style mobile-item">
-                        <form name="search" action="#" th:action="@{/search}" target="_blank" method="post"> <!-- 打开一个新的页面 -->
+                        <form name="search" action="#" th:action="@{/search}" method="post">
                             <!-- <div class="ui icon inverted transparent input"> -->
                             <div class="ui icon input">
                                 <input name="query" type="text" placeholder="search..." class="mystyle-input-size" th:value="${query}">
@@ -47,17 +48,21 @@
                     <div class="ui horizontal link list"> <!-- Link horizontal -->
                         <div class="item">
                             <img src="https://picsum.photos/100/100?image=1" th:src="@{${blog.user.avatar}}" class="ui avatar image">
-                            <div class="content"> 
-                                <a href="#" class="header" th:text="${blog.user.nickname}">陈桐</a>
+                            <div class="content">
+                                <a href="#" th:href="@{/about}" class="header" th:text="${blog.user.nickname}">TONG</a>
                             </div>
                         </div>
                         <div class="item">
-                            <i class="calendar icon"></i>
-                            <i class="middle aligned" th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm')}">2018-09-25</i>
+                            <!-- <i class="calendar icon"></i> -->
+                            <i class="middle aligned" th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2018-09-25</i>
                         </div>
                         <div class="item">
                             <i class="eye icon"></i>
-                            <i class="middle aligned" th:text="${blog.views}">621</i> 次
+                            <i class="middle aligned" th:text="${blog.views}">1</i>
+                        </div>
+                        <div class="item" th:if="${blog.appreciation}">
+                            <i class="thumbs up outline icon"></i>
+                            <i class="middle aligned" th:text="${blog.good}">1</i>
                         </div>
                     </div>
                 </div>
@@ -77,41 +82,26 @@
                     <div class="mystyle-text-content-p">
                         <div class="ui basic teal left pointing label" th:each="tag: ${blog.listTags}" th:text="${tag.name}"> 博客的标签列表 </div>
                     </div>
-
                     <div th:if="${blog.appreciation}">
                         <div class="ui center aligned basic segment">  <!-- basic : without line -->
-                            <button id="payButton" class="ui orange basic circular button">赞赏</button> <!-- circle of button : circular -->
-                        </div>
-                        <div class="ui flowing payQR popup transition hidden">
-                            <div class="ui orange basic label">
-                                <div class="ui images" style="font-size: inherit"> <!-- inherit 继承上级的演样式 -->
-                                    <div class="image">
-                                        <img src="../static/images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" alt="" class="ui image rounded bordered" style="width: 120px">
-                                        <div>支付宝</div>
-                                    </div>
-                                    <div class="image">
-                                        <img src="../static/images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" alt="" class="ui image rounded bordered" style="width: 120px">
-                                        <div>微信</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- <button id="payButton" class="ui orange basic circular button">点赞</button>  circle of button : circular -->
+                            <button id="goodButton" type="button" class="ui orange basic circular button">点赞</button>
                         </div>
                     </div>
-
                 </div>
                 <!-- Content Information -->
                 <div class="ui attached positive message" th:if="${blog.shared}">
                     <div class="ui middle aligned grid"> <!-- middle aligned 垂直方向的居中  -->
                         <div class="eleven wide column">
                            <ui class="list">
-                               <li> 作者 : <span th:text="${blog.user.nickname}"></span> <a href="#"  th:href="@{/about}" target="_blank"> (联系作者) </a>  </li>
+                               <li> 作者 : <span th:text="${blog.user.nickname}"></span> <a href="#"  th:href="@{/about}"> (联系作者) </a>  </li>
                                <li> 发表时间 : <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}"> 2018 </span></li>
-                               <li> 版权声明 : 自由转 - 非用于商业用途 - 保持署名 (创意共享3.0许可证) </li>
-                               <li> 公共号转载 : 请在文末添加制作者的公共号二维码</li>
+                               <li> 版权声明 : 非用于商业用途 - 请保持署名 </li>
+                               <li> 技术交流探讨 : 请邮箱联系本文作者，非诚勿扰 </li>
                            </ui>
                         </div>
                         <div class="five wide column">
-                            <img src="../static/images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" alt="" class="ui right floated rounded bordered image" style="width: 110px;">
+                            <img src="../static/images/myphoto.jpg" th:src="@{/images/myphoto.jpg}" alt="" class="ui right floated rounded bordered image" style="width: 110px;">
                         </div>
                     </div>
                 </div>
@@ -120,7 +110,7 @@
                     <div id="comment-container" class="ui teal segment">
                         <div th:fragment="commentList">
                             <div class="ui threaded comments" style="max-width: 100%;">
-                                <h3 class="ui dividing header">评论</h3>
+                                <h3 class="ui dividing header">评论区</h3>
                                 <div class="comment" th:each="comment: ${comments}">
                                     <a class="avatar"><img src="../static/images/avatar.png" th:src="@{${comment.avatar}}"></a>
                                     <div class="content">
@@ -174,13 +164,13 @@
                                 <div class="field mysytle-mobile-input-wide mystyle-margin-bottom-mini">
                                     <div class="ui left icon input">
                                         <i class="user icon"></i> <!-- 获取当前管理员的数据 : 必须后台有登陆 -->
-                                        <input type="text" name="nickname" placeholder="昵称" th:value="${session.user}!=null ? ${session.user.nickname}">
+                                        <input type="text" name="nickname" placeholder="昵称(必填)" th:value="${session.user}!=null ? ${session.user.nickname}">
                                     </div>
                                 </div>
                                 <div class="field mysytle-mobile-input-wide mystyle-margin-bottom-mini">
                                     <div class="ui left icon input">
                                         <i class="mail icon"></i>
-                                        <input type="email" name="email" placeholder="邮箱" th:value="${session.user}!=null ? ${session.user.email}">
+                                        <input type="email" name="email" placeholder="邮箱(选填)" th:value="${session.user}!=null ? ${session.user.email}">
                                     </div>
                                 </div>
                                 <div class="field mysytle-mobile-input-wide mystyle-margin-bottom-mini">
@@ -200,7 +190,7 @@
             <div class="ui vertical icon buttons">
                 <button id="content-button" type="button" class="ui green button">目录</button>
                 <a href="#comment-container" class="ui teal button">留言</a> <!-- 使用id跳转到页面的制定的位置 !!!! -->
-                <button type="button" class="ui wechat olive icon button"><i class="weixin icon"></i></button>
+                <button type="button" class="ui wechat olive icon button"><i class="qrcode icon"></i></button>
                 <!-- <a href="#" class="ui icon brown button"><i class="chevron up icon"></i></a> -->
                 <div id="toTop-Button" class="ui icon brown button"><i class="chevron up icon"></i></div> <!-- #刷新页面，平滑地返回页面的顶端!!!! -->
             </div>
@@ -213,46 +203,7 @@
             <!-- <img src="../static/images/QRcode.jpg" alt="" class="ui image rounded bordered" style="width: 120px"> -->
         </div>
 
-        <!-- Footer Part of the page -->
-        <footer class="ui inverted vertical segment mystyle-padded-footer-max">
-            <div class="ui center aligned container">
-                <!-- 16 parts of the width : 3 3 3 4 divided with line -->
-                <div class="ui inverted divided stackable grid"> 
-                    <div class="three wide column">
-                        <div class="ui inverted link list">  <!-- link | -->
-                            <a href="#" class="item">
-                                <img src="../static/images/QRcode.jpg" th:src="@{/images/QRcode.jpg}" class="ui rounded image" alt="" style="width: 100px">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">最新博客</h4>                
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">用户故事</a>
-                            <a href="#" class="item">用户故事</a>
-                            <a href="#" class="item">用户故事</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">联系我</h4>                      
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">+33 667233690</a>
-                            <a href="#" class="item">chen2016tong@gmail.com</a>
-                            <a href="#" class="item">Wechat : 1872302197</a>
-                        </div>
-                    </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">最新博客</h4>
-                        <div class="ui inverted link list mystyle-opacity-tiny">
-                            这是我的个人的博客网页，分享关于编程，写作和人生的感悟。希望能借此帮助更多的人，一起学习
-                        </div>
-                    </div>
-                </div>
-                <!-- Bottom line -->
-                <div class="ui inverted section divider"></div>
-                <a class="m-text-spaced mystyle-opacity-tiny"> Copyright@ 2018-2019 Web Designed by CHEN Tong </a>
-            </div>
-        </footer>
+        <footer th:include="_fragments :: footer" class="ui inverted vertical segment mystyle-padded-footer-max"></footer>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
@@ -262,6 +213,7 @@
         <script type="text/javascript" src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
         <script type="text/javascript" src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
         <script type="text/javascript" src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+        <script type="text/javascript" src="../static/lib/alert/semantic-ui-alerts.js" th:src="@{/lib/alert/semantic-ui-alerts.js}"></script>
         <!--
           添加inline, 在script中通过模板来取值 id=${blog.id} !!!
          -->
@@ -270,12 +222,27 @@
             $('.menu.toggle').click(function() {
                $('.mobile-item').toggleClass('mystyle-mobile-hide-style');
             })
-            // 区别获取id和class组件的方式，定义点击的时候弹开
+            // 区别获取id和class组件的方式，定义点击的时候弹开对应的两个二维码
             $('#payButton').popup( {
                 popup : $('.payQR.popup'),
                 on: 'click',
                 position: 'bottom center'
             })
+            // jQuery的弹框的控制 Semantic UI Alert
+            $('#goodButton').click(function() {
+                $.suiAlert({
+                    textHead: '操作成功',
+                    text: '感谢您的阅读和支持，您也可以邮件联系管理员',
+                    bgcolor: '#19c3aa', // Success Info
+                    textcolor: '#fff', // color
+                    position: 'top-center',// position . top And bottom ||  left / center / right
+                    icon: 'info circle', // icon in semantic-UI
+                    time: 3, // time
+                });
+                // 增加点赞的数目
+                $("#comment-container").load(/*[[@{/good/{id}(id=${blog.id})}]]*/"");
+            });
+
             $('#content-button').popup( { // # select id name
                 popup : $('.content-container.popup'), // . select class name
                 on: 'click',
@@ -292,8 +259,8 @@
                 on: 'hover',
                 position: 'left center'
             });
-            // 创建QRcode的变量对象，获取当前界面的链接
-            var server = "localhost:8080";
+            // 创建QRcode的变量对象：扫描二维码出来的链接地址为服务器的地址
+            var server = "http://22c862z455.iask.in";
             var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/+"";
             var qrcode = new QRCode("qrcode", {
                 text: server+url,
@@ -319,7 +286,6 @@
                     }
                 }
             })
-
             // 用户评论信息时的表单验证
             $('.ui.form').form({
                 fields : {
@@ -339,25 +305,31 @@
                     }
                 }
             });
-
             /**
-             * 页面加载完成时候请求的地址，加载平评论的信息 : @GetMapping("/comments/{blogId}")
+             * 页面加载完成时候请求的地址，加载评论的信息 : @GetMapping("/comments/{blogId}")
              */
             $(function () {
                 $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
             })
-
             // 评论的提交按钮的点击事件
             $('#comment-btn').click(function () {
-               var valide = $('.ui.form').form('validate form'); // 现式的调用表单的验证，返回boolean值
+               var valide = $('.ui.form').form('validate form'); // 显式的调用表单的验证，返回boolean值
                if(valide) {
                    console.log("评论表单的校验成功");
                    postData();
+                   $.suiAlert({
+                       textHead: '操作成功',
+                       text: '感谢您的阅读和支持，您也可以邮件联系管理员',
+                       bgcolor: '#19c3aa', // Success Info
+                       textcolor: '#fff', // color
+                       position: 'top-center',// position . top And bottom ||  left / center / right
+                       icon: 'info circle', // icon in semantic-UI
+                       time: 3, // time
+                   })
                } else {
                    console.log("评论表单的校验失败");
                }
             });
-
             // 提交信息到后台 ==> 设置到评论信息的的一一对应
             function postData(){
                $("#comment-container").load(/*[[@{/comments}]]*/"", {
@@ -377,7 +349,6 @@
                 $("[name='parentComment.id']").val(-1); // -1表示的是该评论是最上层的
                 $("[name='content']").attr("placeholder", "请输入您的评论信息....");
             }
-
             // 点击回复，拿到对应的值之后，定位到文字的输入域 @某人
             function reply(object) {
                 var commentid = $(object).data('commentid');

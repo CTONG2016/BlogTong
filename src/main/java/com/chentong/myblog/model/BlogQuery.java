@@ -7,12 +7,15 @@ public class BlogQuery {
 
     private String title;
     private Long typeId;
+    private Long tagId;
     private boolean isRecommend;
     private boolean isPublished;
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
+
+    public Long getTagId() { return tagId; }
+
+    public void setTagId(Long tagId) { this.tagId = tagId; }
 
     public void setTitle(String title) {
         this.title = title;

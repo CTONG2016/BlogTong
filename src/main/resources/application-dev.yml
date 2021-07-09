@@ -15,4 +15,7 @@ logging:
     com.lrm: debug
   file: log/blog-dev.log
 
+server:
+  port: 80
+
 

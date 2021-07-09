@@ -13,4 +13,6 @@ public interface CommentService {
 
     Comment saveComment(Comment comment);
 
+    void updateGoodBlog(Long id);
+
 }
